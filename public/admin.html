@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Barber admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/admin" class="brand"><span data-shop="name">Barbershop</span> <span class="badge">Barber</span></a>
+      <nav class="nav">
+        <a href="/" target="_blank" rel="noopener">View site</a>
+        <button type="button" class="btn btn-ghost btn-sm" id="logout" hidden>Log out</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container admin-main">
+    <section class="card login" id="login-view" hidden>
+      <h1>Barber login</h1>
+      <p class="muted">Manage bookings, hours, time off and prices.</p>
+      <form class="form" id="login-form">
+        <label>Password
+          <input type="password" name="password" required autocomplete="current-password">
+        </label>
+        <p class="form-error" id="login-error" hidden></p>
+        <button class="btn btn-primary btn-block" type="submit">Log in</button>
+      </form>
+    </section>
+
+    <section id="dashboard" hidden>
+      <nav class="tabs" aria-label="Admin sections">
+        <button type="button" data-tab="appointments" class="is-active">Appointments</button>
+        <button type="button" data-tab="hours">Hours &amp; booking rules</button>
+        <button type="button" data-tab="timeoff">Time off</button>
+        <button type="button" data-tab="services">Services &amp; prices</button>
+        <button type="button" data-tab="shop">Shop info</button>
+      </nav>
+
+      <section class="panel" id="panel-appointments">
+        <div class="panel-head">
+          <h2>Appointments</h2>
+          <div class="segmented" id="appt-scope">
+            <button type="button" data-scope="upcoming" class="is-active">Upcoming</button>
+            <button type="button" data-scope="past">Past</button>
+          </div>
+        </div>
+        <div id="appt-list"></div>
+      </section>
+
+      <section class="panel" id="panel-hours" hidden>
+        <div class="panel-head"><h2>Weekly hours</h2></div>
+        <p class="muted panel-intro">Your regular week. For one-off days off or breaks, use Time off.</p>
+        <form id="hours-form">
+          <div id="hours-rows"></div>
+
+          <h3 class="subhead">Booking rules</h3>
+          <p class="muted">These control which times clients can pick.</p>
+          <div class="grid-2">
+            <label class="field">Cleanup time between cuts
+              <select name="buffer_minutes"></select>
+            </label>
+            <label class="field">Start times every
+              <select name="slot_interval"></select>
+            </label>
+            <label class="field">Minimum notice before a booking
+              <select name="min_notice_minutes"></select>
+            </label>
+            <label class="field">How far ahead clients can book
+              <select name="max_days_ahead"></select>
+            </label>
+          </div>
+          <div class="form-actions" style="margin-top: 1.5rem">
+            <button class="btn btn-primary" type="submit">Save hours &amp; rules</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel" id="panel-timeoff" hidden>
+        <div class="panel-head"><h2>Time off</h2></div>
+        <p class="muted panel-intro">Block a day, a vacation, or a few hours. Clients won't see those times.</p>
+        <form class="card form" id="block-form">
+          <div class="grid-2">
+            <label>From <input type="date" name="start_date" required></label>
+            <label>To <input type="date" name="end_date" required></label>
+          </div>
+          <label class="toggle"><input type="checkbox" name="all_day" checked> All day</label>
+          <div class="grid-2" id="block-times" hidden>
+            <label>Start time <input type="time" name="start_time" value="12:00" step="900"></label>
+            <label>End time <input type="time" name="end_time" value="13:00" step="900"></label>
+          </div>
+          <label>Reason <span class="optional">(only you see this)</span>
+            <input name="reason" maxlength="120" placeholder="e.g. Vacation, lunch, dentist">
+          </label>
+          <div class="form-actions"><button class="btn btn-primary" type="submit">Add time off</button></div>
+        </form>
+        <h3 class="subhead">Coming up</h3>
+        <div class="list" id="block-list" style="margin-top: 0.75rem"></div>
+      </section>
+
+      <section class="panel" id="panel-services" hidden>
+        <div class="panel-head">
+          <h2>Services &amp; prices</h2>
+          <button type="button" class="btn btn-ghost btn-sm" id="add-service">Add a service</button>
+        </div>
+        <div id="service-forms"></div>
+      </section>
+
+      <section class="panel" id="panel-shop" hidden>
+        <div class="panel-head"><h2>Shop info</h2></div>
+        <form class="card form" id="shop-form">
+          <div class="grid-2">
+            <label>Shop name <input name="name" required maxlength="80"></label>
+            <label>Tagline <input name="tagline" maxlength="160"></label>
+            <label>Street address <input name="address" maxlength="160"></label>
+            <label>City <input name="city" maxlength="80"></label>
+          </div>
+          <label>Parking &amp; how to find us <textarea name="parking" rows="2" maxlength="300"></textarea></label>
+          <div class="grid-2">
+            <label>Phone <input name="phone" type="tel" maxlength="30"></label>
+            <label>Email <input name="email" type="email" maxlength="120"></label>
+            <label>Instagram <input name="instagram" maxlength="60" placeholder="@yourshop"></label>
+          </div>
+          <label>Cancellation policy <textarea name="cancellation_policy" rows="2" maxlength="400"></textarea></label>
+          <label>House rules <span class="optional">(one per line)</span>
+            <textarea name="rules" rows="6"></textarea>
+          </label>
+          <div class="form-actions"><button class="btn btn-primary" type="submit">Save shop info</button></div>
+        </form>
+      </section>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script type="module" src="/js/admin.js"></script>
+</body>
+</html>

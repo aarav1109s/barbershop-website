@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Book a cut</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/" class="brand" data-shop="name">Barbershop</a>
+      <nav class="nav" aria-label="Main">
+        <a href="/#services">Services</a>
+        <a href="/#visit">Visit</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="narrow book">
+    <a href="/" class="back">← Back to the shop</a>
+    <h1>Book a cut</h1>
+
+    <ol class="stepper" id="stepper">
+      <li data-step="service">Service</li>
+      <li data-step="time">Day &amp; time</li>
+      <li data-step="details">Your details</li>
+    </ol>
+
+    <section class="step" id="step-service">
+      <h2>What are we doing today?</h2>
+      <div class="choice-list" id="service-list"></div>
+    </section>
+
+    <section class="step" id="step-time" hidden>
+      <div class="step-head">
+        <h2>Pick a day and time</h2>
+        <button type="button" class="link" data-go="service">Change service</button>
+      </div>
+      <p class="summary-chip" id="time-service"></p>
+      <p class="notice" id="time-notice" hidden></p>
+      <div class="day-strip" id="day-strip" aria-label="Days"></div>
+      <div id="time-grid"></div>
+    </section>
+
+    <section class="step" id="step-details" hidden>
+      <div class="step-head">
+        <h2>Almost done</h2>
+        <button type="button" class="link" data-go="time">Change time</button>
+      </div>
+      <div class="card review" id="review"></div>
+      <form class="form" id="details-form" novalidate>
+        <label>Name
+          <input name="name" required maxlength="80" autocomplete="name">
+        </label>
+        <label>Phone
+          <input name="phone" type="tel" required maxlength="30" autocomplete="tel" placeholder="So we can text if anything changes">
+        </label>
+        <label>Email <span class="optional">(optional)</span>
+          <input name="email" type="email" maxlength="120" autocomplete="email">
+        </label>
+        <label>Anything we should know? <span class="optional">(optional)</span>
+          <textarea name="notes" rows="2" maxlength="500" placeholder="e.g. Keep it long on top, first visit"></textarea>
+        </label>
+        <p class="policy" id="policy"></p>
+        <p class="form-error" id="form-error" hidden></p>
+        <button class="btn btn-primary btn-block" type="submit">Confirm booking</button>
+      </form>
+    </section>
+
+    <section class="step done" id="step-done" hidden>
+      <div class="check" aria-hidden="true">✓</div>
+      <h2>You're booked</h2>
+      <p class="muted" id="done-message"></p>
+      <div class="card" id="done-summary"></div>
+      <div class="done-actions">
+        <a class="btn btn-primary" id="calendar-link" download="haircut.ics">Add to calendar</a>
+        <a class="btn btn-ghost" href="/">Back to the shop</a>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="/js/book.js"></script>
+</body>
+</html>

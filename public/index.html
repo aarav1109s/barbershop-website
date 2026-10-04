@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Barbershop</title>
+  <meta name="description" content="Book a haircut online. Prices, hours, location and house rules.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/" class="brand" data-shop="name">Barbershop</a>
+      <nav class="nav" aria-label="Main">
+        <a href="#services">Services</a>
+        <a href="#visit">Visit</a>
+        <a href="#rules">House rules</a>
+        <a href="/book" class="btn btn-primary btn-sm">Book a cut</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <p class="eyebrow" data-shop="city"></p>
+        <h1 data-shop="name"></h1>
+        <p class="lead" data-shop="tagline"></p>
+        <div class="hero-actions">
+          <a href="/book" class="btn btn-primary">Book a cut</a>
+          <a href="#services" class="btn btn-ghost">See prices</a>
+        </div>
+        <p class="next-open" id="next-open" hidden></p>
+      </div>
+    </section>
+
+    <section id="services" class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Services &amp; prices</h2>
+          <p class="muted">Pick one when you book. Prices include tax.</p>
+        </div>
+        <div class="service-grid" id="service-grid"></div>
+      </div>
+    </section>
+
+    <section id="visit" class="section section-alt">
+      <div class="container visit-grid">
+        <div>
+          <h2>Visit the shop</h2>
+          <p class="address" id="address"></p>
+          <p class="muted" id="parking"></p>
+          <a class="link-arrow" id="map-link" target="_blank" rel="noopener">Open in Google Maps →</a>
+          <ul class="contact-list" id="contact"></ul>
+        </div>
+        <div>
+          <h3>Hours</h3>
+          <dl class="hours" id="hours"></dl>
+        </div>
+      </div>
+    </section>
+
+    <section id="rules" class="section">
+      <div class="narrow">
+        <h2>House rules</h2>
+        <p class="muted" id="cancellation"></p>
+        <ol class="rules" id="rules-list"></ol>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span>&copy; <span id="year"></span> <span data-shop="name"></span></span>
+      <a href="/admin">Barber login</a>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/home.js"></script>
+</body>
+</html>
